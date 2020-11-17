@@ -1,0 +1,24 @@
+<div>
+  <mat-tab-group>
+    <mat-tab *ngFor="let tab of tabs">
+      <ng-template mat-tab-label>
+        <div>
+          {{tab.title()}}
+        </div>
+        <div>
+          <button (click)="onCloseTab(tab)">X</button>
+        </div>
+      </ng-template>
+
+      <ng-template matTabContent>
+        <div *ngIf="tab.isEditCustomer()">
+          <app-edit-customer></app-edit-customer>
+        </div>
+        <div *ngIf="tab.isAllCustomer()">
+          <h1>ViewAll</h1>
+        </div>
+      </ng-template>
+
+    </mat-tab>
+  </mat-tab-group>
+</div>
