@@ -43,7 +43,7 @@ export class WorkspacePanelComponent implements OnInit, OnDestroy {
   private addTabViewAllCustomers() {
     let already = this.tabs.some(t => t.id == 0);
     if (!already) {
-      let tab = new Tab();
+      let tab: Tab = new Tab();
       tab.id = 0;
       tab.name = "all customers"
       tab.type = TabTypes.allCustomer;

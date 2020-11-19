@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Tab } from '../models/tab.model';
 
 @Injectable({
   providedIn: 'root'
