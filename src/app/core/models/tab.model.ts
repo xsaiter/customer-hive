@@ -1,22 +1,43 @@
-export class Tab {
+export enum TabTypes {
+  editCustomer,
+  allCustomers
+}
+
+export abstract class Tab {
   id: number;
-  type: TabTypes;
   name: string;
 
+  abstract getType(): TabTypes;
+
   isEditCustomer(): boolean {
-    return this.type === TabTypes.editCustomer;
+    return this.getType() === TabTypes.editCustomer;
   }
 
   isAllCustomer(): boolean {
-    return this.type === TabTypes.allCustomer;
+    return this.getType() === TabTypes.allCustomers;
   }
 
   title(): string {
     return `${this.name} (${this.id})`;
   }
+
+  static createEditCustomer() {
+    return new EditCustomerTab();
+  }
+
+  static createAllCustomers() {
+    return new AllCustomersTab();
+  }
 }
 
-export enum TabTypes {
-  editCustomer,
-  allCustomer
+export class EditCustomerTab extends Tab {
+  getType(): TabTypes {
+    return TabTypes.editCustomer;
+  }
+}
+
+export class AllCustomersTab extends Tab {
+  getType(): TabTypes {
+    return TabTypes.allCustomers;
+  }
 }

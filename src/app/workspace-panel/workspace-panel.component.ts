@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Tab, TabTypes } from '../core/models/tab.model';
+import { Tab } from '../core/models/tab.model';
 import { TabService } from '../core/services/tab.service';
 
 @Component({
@@ -33,20 +33,18 @@ export class WorkspacePanelComponent implements OnInit, OnDestroy {
   }
 
   private addTabCreateNewCustomer() {
-    let tab = new Tab();
+    let tab = Tab.createEditCustomer();
     tab.id = this.lastTabId++;
     tab.name = "create new customer"
-    tab.type = TabTypes.editCustomer;
     this.tabs.push(tab);
   }
 
   private addTabViewAllCustomers() {
     let already = this.tabs.some(t => t.id == 0);
     if (!already) {
-      let tab: Tab = new Tab();
+      let tab = Tab.createAllCustomers();
       tab.id = 0;
       tab.name = "all customers"
-      tab.type = TabTypes.allCustomer;
       this.tabs.push(tab);
     }
   }

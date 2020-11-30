@@ -19,6 +19,6 @@ export class EditCustomerComponent implements OnInit {
 
   onSave(): void {
     this.customService.saveCustomer(this.customer);
-    this.saveEvent.emit();
+    this.saveEvent.emit(this.customer);
   }
 }

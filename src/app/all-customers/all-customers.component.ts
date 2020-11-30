@@ -11,7 +11,7 @@ import { CustomerService } from '../core/services/customer.service';
 export class AllCustomersComponent implements OnInit {
   dataSource = new MatTableDataSource<Customer>();
 
-  readonly tableColumns: string[] = ['firstName', 'lastName', 'email'];
+  readonly tableColumns: string[] = ['id', 'firstName', 'lastName', 'email'];
 
   constructor(private customerService: CustomerService) {
   }
