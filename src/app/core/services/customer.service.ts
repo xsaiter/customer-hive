@@ -9,6 +9,7 @@ export class CustomerService {
   private lastId: number;
 
   constructor() {
+    this.lastId = 0;
   }
 
   saveCustomer(customer: Customer): number {

@@ -3,7 +3,7 @@
     <mat-tab *ngFor="let tab of tabs">
       <ng-template mat-tab-label>
         <div>
-          {{tab.title()}}
+          {{tab.getTitle()}}
         </div>
         <div>
           <button (click)="onCloseTab(tab)">X</button>

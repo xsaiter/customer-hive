@@ -1,12 +1,11 @@
+import { Customer } from './customer.model';
+
 export enum TabTypes {
   editCustomer,
   allCustomers
 }
 
 export abstract class Tab {
-  id: number;
-  name: string;
-
   abstract getType(): TabTypes;
 
   isEditCustomer(): boolean {
@@ -17,12 +16,10 @@ export abstract class Tab {
     return this.getType() === TabTypes.allCustomers;
   }
 
-  title(): string {
-    return `${this.name} (${this.id})`;
-  }
+  abstract getId(): number;
 
-  static createEditCustomer() {
-    return new EditCustomerTab();
+  static createEditCustomer(customer: Customer) {
+    return new EditCustomerTab(customer);
   }
 
   static createAllCustomers() {
@@ -31,13 +28,40 @@ export abstract class Tab {
 }
 
 export class EditCustomerTab extends Tab {
+  private customer: Customer;
+
+  constructor(customer: Customer) {
+    super();
+    this.customer = customer;
+  }
+
   getType(): TabTypes {
     return TabTypes.editCustomer;
+  }
+
+  getId(): number {
+    return this.customer.id;
+  }
+
+  getTitle(): string {
+    if (this.getId() > 0) {
+      return "create new customer";
+    } else {
+      return `${this.getId()} edit customer`;
+    }
   }
 }
 
 export class AllCustomersTab extends Tab {
   getType(): TabTypes {
     return TabTypes.allCustomers;
+  }
+
+  getId(): number {
+    return -1;
+  }
+
+  getTitle(): string {
+    return `all customers`;
   }
 }
