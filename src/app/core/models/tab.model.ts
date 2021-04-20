@@ -8,6 +8,10 @@ export enum TabTypes {
 export abstract class Tab {
   abstract getType(): TabTypes;
 
+  getTitle(): string {
+    return "";
+  }
+
   isEditCustomer(): boolean {
     return this.getType() === TabTypes.editCustomer;
   }
@@ -45,10 +49,14 @@ export class EditCustomerTab extends Tab {
 
   getTitle(): string {
     if (this.getId() > 0) {
-      return "create new customer";
+      return `create new customer`;
     } else {
       return `${this.getId()} edit customer`;
     }
+  }
+
+  getCustomer(): Customer {
+    return this.customer;
   }
 }
 

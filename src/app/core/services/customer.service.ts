@@ -19,14 +19,14 @@ export class CustomerService {
       existingCustomer.firstName = customer.firstName;
       existingCustomer.lastName = customer.lastName;
     } else {
-      this.customers.push(customer);
       this.lastId++;
       customer.id = this.lastId;
+      this.customers.push(customer);
     }
     return customer.id;
   }
 
   getAllCustomers(): Promise<Customer[]> {
-    return Promise.resolve(this.customers);
+    return Promise.resolve(this.customers.filter(_ => _.id > 0));
   }
 }

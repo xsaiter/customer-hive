@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Customer } from '../core/models/customer.model';
+import { EditCustomerTab, Tab } from '../core/models/tab.model';
 import { CustomerService } from '../core/services/customer.service';
 
 @Component({
@@ -11,14 +12,17 @@ export class EditCustomerComponent implements OnInit {
 
   constructor(private customService: CustomerService) { }
 
-  customer: Customer = new Customer();
+  @Input() tab: Tab;
+  @Output() saveEvent: EventEmitter<Customer> = new EventEmitter<Customer>();
 
   ngOnInit(): void { }
 
-  @Output() saveEvent: EventEmitter<Customer> = new EventEmitter<Customer>();
+  customer(): Customer {
+    return (<EditCustomerTab>this.tab).getCustomer();
+  }
 
   onSave(): void {
-    this.customService.saveCustomer(this.customer);
-    this.saveEvent.emit(this.customer);
+    this.customService.saveCustomer(this.customer());
+    this.saveEvent.emit(this.customer());
   }
 }

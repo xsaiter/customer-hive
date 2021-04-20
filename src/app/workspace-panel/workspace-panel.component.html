@@ -12,7 +12,7 @@
 
       <ng-template matTabContent>
         <div *ngIf="tab.isEditCustomer()">
-          <app-edit-customer></app-edit-customer>
+          <app-edit-customer [tab]="tab"></app-edit-customer>
         </div>
         <div *ngIf="tab.isAllCustomer()">
           <app-all-customers></app-all-customers>
